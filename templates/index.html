@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Pannel</title>
+    <link ref="stylesheet" href="../static/css/style.css">
+    <style>
+        h1{
+            text-align: center;
+            font-size: 25px;
+        }
+        .container {
+         width: 80%;
+        height: 200px;
+         background: aqua;
+        margin: auto;
+        padding: 10px;
+        }
+
+        .GPS {
+        width: 15%;
+        height: 200px;
+        margin-left: 5%;
+        margin-right: 10%;
+        margin-bottom: 5%;
+        background: aqua;
+        float: left;
+        }
+
+        .MAP {
+        margin-left: 30%;
+        margin-right: 10%;
+        height: 400px;
+        background: black;
+        }
+
+        .Camera {
+        margin-left: 30%;
+        margin-right: 10%;
+        height: 400px;
+        background: black;
+        }
+    
+    </style>
+
+</head>
+<body>
+    <h1>Station</h1>
+    <section>
+        <div class="GPS">
+        <p>GPS</p>
+        </div>
+        <div class="MAP">
+            <p style="color: white;">MAP</p>
+        </div>
+
+        <div class="GPS">
+            <!--button type="submit" formmethod="post" name="Toggle">Toggle</button-->
+            <form action="#" method="POST">
+            <button type="submit" name="Toggle">Toggle</button>
+            <hr>
+            <button name="Plant">Plant</button>
+            <hr>
+            <button name="+">+</button>
+            <button name="-">-</button>
+            <hr>
+            <button name="Forward">Forward</button>
+            <button name="Backward">Backward</button>
+            <hr>
+            <button name="left">left</button>
+            <button name="right">right</button>
+            </form>
+        </div>
+        
+
+        <div class="Camera">
+            <p style="color: white;">Cam</p>
+        </div>
+
+    
+        
+    </section>
+    
+
+</body>
+</html>
