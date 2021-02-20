@@ -41,7 +41,7 @@
         height: 400px;
         background: black;
         }
-    
+
     </style>
 
 </head>
@@ -72,16 +72,39 @@
             <button name="right">right</button>
             </form>
         </div>
-        
+
 
         <div class="Camera">
             <p style="color: white;">Cam</p>
         </div>
 
-    
-        
+<div>
+  <h1 style="text"><span id="counter">{{data['counter']}}</span></h1>
+
+</div>
+
     </section>
-    
+    <script >
+
+
+    var socket = io();
+    socket.on('user', function(json){
+      console.log('user event')
+      console.log(json)
+      $("#counter").text(json.counter)
+
+
+    })
+
+    socket.on('connect', function(){
+      console.log('connect to web sockets')
+    });
+
+
+
+    </script>
+
+
 
 </body>
 </html>
