@@ -1,25 +1,18 @@
-try:
-    from flask import Flask, render_template
-    from flask_socketio import SocktIO
-    from flask_socketio import emit
-    import os
-    import sys
-    import json
-    
-    
-except Exception as e:
-    print(format(e))
-    
+from flask import Flask, render_template
+from flask_socketio import SocketIO
+from flask_socketio import SocketIO, emit
+import os
+import sys
+import json
 
+
+    
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret'
-socketio=SockIO(app)
+socketio=SocketIO(app)
 
 
-
-
-
-@sockio.on('connect')
+@socketio.on('connect')
 def ws_connect():
     try:
         #Read
@@ -44,7 +37,7 @@ def ws_connect():
         fw.close()
         emit('user', {"counter":0}, broadcast=True)
         
-@sockio.on('disconnect')
+@socketio.on('disconnect')
 def ws_disconnect():
     
     f=open("test.txt", "r")
@@ -55,7 +48,7 @@ def ws_disconnect():
     
     #write
     fw= open("test.txt", "r")
-    fw.write(json.dump(tem)
+    fw.write(json.dump(tem))
     fw.close()
     emit('user', tem, broadcast=True)
     
@@ -63,9 +56,9 @@ def ws_disconnect():
 @app.route('/', methods=["POST","GET"])
 
 def home():
-    f=open("text.txt", "r")
+    f=open("test.txt", "r")
     data = f.read()
-    data = {"counter": int(json.load(data).get("counter"))}
+    data = {"counter": int(json.loads(data).get("counter"))}
     return render_template("index.html", data=data)
 
 if __name__ == "__main__":
