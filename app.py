@@ -5,12 +5,9 @@ import os
 import sys
 import json
 
-
-    
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret'
 socketio=SocketIO(app)
-
 
 @socketio.on('connect')
 def ws_connect():
@@ -62,4 +59,4 @@ def home():
     return render_template("index.html", data=data)
 
 if __name__ == "__main__":
-    socketio.run(app)
+    socketio.run(app, debug=True)

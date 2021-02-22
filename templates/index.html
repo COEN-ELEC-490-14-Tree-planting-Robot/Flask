@@ -1,114 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Control Pannel</title>
-    <link ref="stylesheet" href="../static/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Control Pannel</title>
+  <link ref="stylesheet" href="../static/css/style.css">
 
-    <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
-    <style>
-        h1{
-            text-align: center;
-            font-size: 25px;
-        }
-        .container {
-         width: 80%;
-        height: 200px;
-         background: aqua;
-        margin: auto;
-        padding: 10px;
-        }
+  <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
+  <style>
+    h1 {
+      text-align: center;
+      font-size: 25px;
+    }
 
-        .GPS {
-        width: 15%;
-        height: 200px;
-        margin-left: 5%;
-        margin-right: 10%;
-        margin-bottom: 5%;
-        background: aqua;
-        float: left;
-        }
+    .container {
+      width: 80%;
+      height: 200px;
+      background: burlywood;
+      margin: auto;
+      padding: 10px;
+    }
 
-        .MAP {
-        margin-left: 30%;
-        margin-right: 10%;
-        height: 400px;
-        background: black;
-        }
+    .GPS {
+      width: 15%;
+      height: 200px;
+      margin-left: 5%;
+      margin-right: 10%;
+      margin-bottom: 5%;
+      background: burlywood;
+      float: left;
+    }
 
-        .Camera {
-        margin-left: 30%;
-        margin-right: 10%;
-        height: 400px;
-        background: black;
-        }
+    .MAP {
+      margin-left: 30%;
+      margin-right: 10%;
+      width: 800px;
+      height: 400px;
+      /* background: black; */
+    }
 
-    </style>
+    .Camera {
+      margin-left: 30%;
+      margin-right: 10%;
+      width: 800px;
+      height: 400px;
+      /*      background: black;*/
+    }
+  </style>
 
 </head>
+
 <body>
-    <h1>Station</h1>
-    <section>
-        <div class="GPS">
-        <p>GPS</p>
-        </div>
-        <div class="MAP">
-            <p style="color: white;">MAP</p>
-        </div>
+  <h1>Station</h1>
+  <section>
+    <div class="GPS">
+      <p>GPS</p>
+    </div>
+    <p style="color: black;">Map</p>
+    <div class="MAP">
+      <!-- <p style="color: white;">MAP</p> -->
+      <img id=mapBox />
+    </div>
 
-        <div class="GPS">
-            <!--button type="submit" formmethod="post" name="Toggle">Toggle</button-->
-            <form action="#" method="POST">
-            <button type="submit" name="Toggle">Toggle</button>
-            <hr>
-            <button name="Plant">Plant</button>
-            <hr>
-            <button name="+">+</button>
-            <button name="-">-</button>
-            <hr>
-            <button name="Forward">Forward</button>
-            <button name="Backward">Backward</button>
-            <hr>
-            <button name="left">left</button>
-            <button name="right">right</button>
-            </form>
-        </div>
+    <div class="GPS">
+      <!--button type="submit" formmethod="post" name="Toggle">Toggle</button-->
+      <form action="#" method="POST">
+        <button type="submit" name="Toggle">Toggle</button>
+        <hr>
+        <button name="Plant">Plant</button>
+        <hr>
+        <button name="+">+</button>
+        <button name="-">-</button>
+        <hr>
+        <button name="Forward">Forward</button>
+        <button name="Backward">Backward</button>
+        <hr>
+        <button name="left">left</button>
+        <button name="right">right</button>
+      </form>
+    </div>
 
 
-        <div class="Camera">
-            <p style="color: white;">Cam</p>
-        </div>
+    <div class="Camera">
+      <p style="color: black;">Cam</p>
+      <!-- <img src="{{url_for('static',filename = 'pic/2.png')}}" height="400px" width="800px" /> -->
+      <img id=imageBox />
+    </div>
 
-<div>
-  <h1 style="text-align:center;"><span id="counter">{{data['counter']}}</span></h1>
+    <div>
+      <h1 style="text-align:center;"><span id="counter">{{data['counter']}}</span></h1>
 
-</div>
+    </div>
 
-    </section>
-    <script >
-
+  </section>
+  <script>
 
     var socket = io();
-    socket.on('user', function(json){
+    socket.on('user', function (json) {
       console.log('user event')
       console.log(json)
       $("#counter").text(json.counter)
-
-
     })
 
-    socket.on('connect', function(){
+    socket.on('connect', function () {
       console.log('connect to web sockets')
     });
 
-    socket.on('disconnect', function(){
+    socket.on('disconnect', function () {
       console.log('disconnect to web sockets')
     });
 
-    </script>
+    document.getElementById('mapBox').src = "static/pic/" + "20min.png";
+    document.getElementById('mapBox').style.height = "400px";
+    document.getElementById('mapBox').style.width = "800px";
+
+    function doSetTimeout(i) {
+      // setTimeout(function () { alert(i); }, 5000 * i);
+      setTimeout(function () {
+        document.getElementById('imageBox').src = "static/pic/" + i + ".png";
+        document.getElementById('imageBox').style.height = "400px";
+        document.getElementById('imageBox').style.width = "800px";
+      }, 4000 * i);
+    }
+
+    for (var i = 2; i <= 7; ++i) {
+      doSetTimeout(i);
+    }
+
+
+  </script>
 
 
 
 </body>
+
 </html>
