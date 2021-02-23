@@ -118,13 +118,13 @@
     function doSetTimeout(i) {
       // setTimeout(function () { alert(i); }, 5000 * i);
       setTimeout(function () {
-        document.getElementById('imageBox').src = "static/pic/" + i + ".png";
+        document.getElementById('imageBox').src = "static/pic/s" + i + ".png";
         document.getElementById('imageBox').style.height = "400px";
         document.getElementById('imageBox').style.width = "800px";
       }, 4000 * i);
     }
 
-    for (var i = 2; i <= 7; ++i) {
+    for (var i = 1; i <= 8; ++i) {
       doSetTimeout(i);
     }
 
