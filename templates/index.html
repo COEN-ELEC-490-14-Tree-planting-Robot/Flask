@@ -3,124 +3,163 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Control Pannel</title>
-  <link ref="stylesheet" href="../static/css/style.css">
-
-  <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
-  <style>
-    h1 {
-      text-align: center;
-      font-size: 25px;
-    }
-
-    .container {
-      width: 80%;
-      height: 200px;
-      background: burlywood;
-      margin: auto;
-      padding: 10px;
-    }
-
-    .GPS {
-      width: 15%;
-      height: 200px;
-      margin-left: 5%;
-      margin-right: 10%;
-      margin-bottom: 5%;
-      background: burlywood;
-      float: left;
-    }
-
-    .MAP {
-      margin-left: 30%;
-      margin-right: 10%;
-      width: 800px;
-      height: 400px;
-      /* background: black; */
-    }
-
-    .Camera {
-      margin-left: 30%;
-      margin-right: 10%;
-      width: 800px;
-      height: 400px;
-      /*      background: black;*/
-    }
-  </style>
-
+  <link ref="stylesheet" type="text/css" href="../static/css/style.css"> 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.3/socket.io.js" integrity="sha512-2RDFHqfLZW8IhPRvQYmK9bTLfj/hddxGXQAred2wNZGkrKQkLGj8RCkXfRJPHlDerdHHIzTFaahq4s/P4V6Qig==" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/c48400dc75.js" crossorigin="anonymous"></script>
+  <!-- Latest compiled and minified CSS -->
 </head>
 
 <body>
-  <h1>Station</h1>
-  <section>
-    <div class="GPS">
-      <p>GPS</p>
+  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <div class="container-fluid justify-content-evenly">
+      <a class="navbar-brand" href="#"><b>Station View - Control Panel</b></a>
     </div>
-    <p style="color: black;">Map</p>
-    <div class="MAP">
-      <!-- <p style="color: white;">MAP</p> -->
-      <img id=mapBox />
+  </nav>
+  
+  <div class="container my-4" style="width:80%; margin: auto;">
+    <div class="row justify-content-evenly">
+      <!--controllers section-->
+      <div name="controllers" class="col-sm-4 bg-light shadow-sm p-2">
+        <div>
+          <h1 class="text-center px-2"><i class="fas fa-gamepad"></i> Controllers</h1>
+        </div>
+        <div name="webots-controller" class="container-fluid my-4 shadow p-4">
+          <h2>Webots</h2>
+          <div class="row justify-content-evenly my-2">
+            <div class="col-sm-4 col align-self-center">
+              <button type="button" class="btn btn-secondary"><i class="fas fa-arrow-circle-up fa-3x"></i></button>
+            </div>
+          </div>
+          <div class="row justify-content-evenly">
+            <div class="col-sm-4 align-self-start">
+              <button type="button" class="btn btn-secondary"><i class="fas fa-arrow-circle-left fa-3x"></i></button>
+            </div>
+            <div class="col-sm-4 align-self-end">
+              <button type="button" class="btn btn-secondary "><i class="fas fa-arrow-circle-right fa-3x"></i></button>
+            </div>
+          </div>
+          <div class="row justify-content-evenly my-2">
+            <div class="col-sm-4 col align-self-center">
+              <button type="button" class="btn btn-secondary"><i class="fas fa-arrow-circle-down fa-3x"></i></button>
+            </div>
+          </div>
+          <div class="row justify-content-evenly my-4">
+            <div class="col-sm-6 bg-info text-center rounded">
+
+              <div class=" form-check form-switch m-2">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Auto</label>
+              </div>
+            </div>
+            <div class="col-sm-6 text-center">
+              <button type="button" class="btn btn-success"><i class="fas fa-seedling"></i> Plant</button>
+            </div>
+          </div>
+        </div>
+        <div name="turtle-controller" class="container-fluid my-4 shadow p-4">
+          <h2>Turtlebot</h2>
+          <div class="row justify-content-evenly my-2">
+            <div class="col-sm-4 col align-self-center">
+              <button type="button" class="btn btn-secondary"><i class="fas fa-arrow-circle-up fa-3x"></i></button>
+            </div>
+          </div>
+          <div class="row justify-content-evenly">
+            <div class="col-sm-4 align-self-start">
+              <button type="button" class="btn btn-secondary"><i class="fas fa-arrow-circle-left fa-3x"></i></button>
+            </div>
+            <div class="col-sm-4 align-self-end">
+              <button type="button" class="btn btn-secondary "><i class="fas fa-arrow-circle-right fa-3x"></i></button>
+            </div>
+          </div>
+          <div class="row justify-content-evenly my-2">
+            <div class="col-sm-4 col align-self-center">
+              <button type="button" class="btn btn-secondary"><i class="fas fa-arrow-circle-down fa-3x"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--views section-->
+      <div class="col-sm-6 bg-light shadow-sm p-2">
+        <h1 class="text-center"><i class="fas fa-camera-retro"></i> Live Views</h1>
+        <div style="overflow-y: scroll;max-height: 50rem;">
+          <div name="map-3d" class="container-fluid my-4 shadow p-4">
+            <h2>3D octomap of webots</h2>
+            <img id=map3d class="img-fluid" alt="3d-webots-map">
+          </div>
+          <div name="camera-live" class="container-fluid my-4 shadow p-4">
+            <h2>Live camera view</h2>
+            <img id=cam class="img-fluid" alt="3d-webots-map">
+          </div>
+          <hr/>
+          <div name="map-2d" class="container-fluid my-4 shadow p-4">
+            <h2>2D octomap of turtlebot</h2>
+            <img id=map2d class="img-fluid" alt="3d-webots-map">
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="GPS">
-      <!--button type="submit" formmethod="post" name="Toggle">Toggle</button-->
-      <form action="#" method="POST">
-        <button type="submit" name="Toggle">Toggle</button>
-        <hr>
-        <button name="Plant">Plant</button>
-        <hr>
-        <button name="+">+</button>
-        <button name="-">-</button>
-        <hr>
-        <button name="Forward">Forward</button>
-        <button name="Backward">Backward</button>
-        <hr>
-        <button name="left">left</button>
-        <button name="right">right</button>
-      </form>
+    <div class="toast-container position-fixed bottom-0 start-0 p-3">
+      <div style="z-index: 5">
+        <div id="liveToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <i class="fas fa-map-marked-alt"></i>
+            <strong class="px-1">Live Webot GPS location</strong>
+            <i class="fas fa-map-marked-alt me-auto"></i>
+            <small>1 seconds ago</small>
+          </div>
+          <div class="toast-body">
+            longtitude:80.09809 | altitude:38.32897
+          </div>
+        </div>
+      </div>
+      <div style="z-index: 5">
+        <div id="liveToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <i class="fas fa-map-marked-alt"></i>
+            <strong class="px-1">Live Turtlebot location</strong>
+            <i class="fas fa-map-marked-alt me-auto"></i>
+            <small>1 seconds ago</small>
+          </div>
+          <div class="toast-body">
+            longtitude:80.09809 | altitude:38.32897
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
-
-    <div class="Camera">
-      <p style="color: black;">Cam</p>
-      <!-- <img src="{{url_for('static',filename = 'pic/2.png')}}" height="400px" width="800px" /> -->
-      <img id=imageBox />
-    </div>
-
-    <div>
-      <h1 style="text-align:center;"><span id="counter">{{data['counter']}}</span></h1>
-
-    </div>
-
-  </section>
   <script>
 
-    var socket = io();
-    socket.on('user', function (json) {
-      console.log('user event')
-      console.log(json)
-      $("#counter").text(json.counter)
+  $(document).ready(function(){
+      var socket = io();
+
+      socket.on('connect', function () {
+        console.log('socket client connected')
+      });
+
+
+      socket.on('disconnect', function () {
+        console.log('socket client disconnected')
+      });
     })
 
-    socket.on('connect', function () {
-      console.log('connect to web sockets')
-    });
 
-    socket.on('disconnect', function () {
-      console.log('disconnect to web sockets')
-    });
-
-    document.getElementById('mapBox').src = "static/pic/" + "20min.png";
-    document.getElementById('mapBox').style.height = "400px";
-    document.getElementById('mapBox').style.width = "800px";
+    document.getElementById('map3d').src = "static/pic/" + "20min.png";
+    document.getElementById('map3d').style.height = "400px";
+    document.getElementById('map3d').style.width = "800px";
 
     function doSetTimeout(i) {
       // setTimeout(function () { alert(i); }, 5000 * i);
       setTimeout(function () {
-        document.getElementById('imageBox').src = "static/pic/s" + i + ".png";
-        document.getElementById('imageBox').style.height = "400px";
-        document.getElementById('imageBox').style.width = "800px";
+        document.getElementById('cam').src = "static/pic/s" + i + ".png";
+        document.getElementById('cam').style.height = "400px";
+        document.getElementById('cam').style.width = "800px";
       }, 4000 * i);
     }
 
