@@ -17,12 +17,28 @@ def ws_connect():
 def ws_disconnect():
     print('socket disconnected')
     
+@socketio.on('wb-navi-commands')
+def wb_navigate(command):
+    if command == 'w':
+        print(command)
+    elif command == 'a':
+        print(command)
+    elif command == 's':
+        print(command)
+    elif command == 'd':
+        print(command)
+    elif command == 'p':
+        print(command)
+    elif command == 'a':
+        print(command)
+    elif command == 'm':
+        print(command)
+
 
 @app.route('/', methods=["POST","GET"])
-
-
 def home():
     return render_template("index.html")
+
 
 
 if __name__ == "__main__":

@@ -7,10 +7,7 @@
   <title>Control Pannel</title>
   <link ref="stylesheet" type="text/css" href="../static/css/style.css"> 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.3/socket.io.js" integrity="sha512-2RDFHqfLZW8IhPRvQYmK9bTLfj/hddxGXQAred2wNZGkrKQkLGj8RCkXfRJPHlDerdHHIzTFaahq4s/P4V6Qig==" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-  <script src="https://kit.fontawesome.com/c48400dc75.js" crossorigin="anonymous"></script>
+  
   <!-- Latest compiled and minified CSS -->
 </head>
 
@@ -32,20 +29,20 @@
           <h2>Webots</h2>
           <div class="row justify-content-evenly my-2">
             <div class="col-sm-4 col align-self-center">
-              <button type="button" class="btn btn-secondary"><i class="fas fa-arrow-circle-up fa-3x"></i></button>
+              <button id="wb-up" type="button" class="btn btn-secondary"><i class="fas fa-arrow-circle-up fa-3x"></i></button>
             </div>
           </div>
           <div class="row justify-content-evenly">
             <div class="col-sm-4 align-self-start">
-              <button type="button" class="btn btn-secondary"><i class="fas fa-arrow-circle-left fa-3x"></i></button>
+              <button id="wb-lt" type="button" class="btn btn-secondary"><i class="fas fa-arrow-circle-left fa-3x"></i></button>
             </div>
             <div class="col-sm-4 align-self-end">
-              <button type="button" class="btn btn-secondary "><i class="fas fa-arrow-circle-right fa-3x"></i></button>
+              <button id="wb-rt" type="button" class="btn btn-secondary "><i class="fas fa-arrow-circle-right fa-3x"></i></button>
             </div>
           </div>
           <div class="row justify-content-evenly my-2">
             <div class="col-sm-4 col align-self-center">
-              <button type="button" class="btn btn-secondary"><i class="fas fa-arrow-circle-down fa-3x"></i></button>
+              <button id="wb-dn" type="button" class="btn btn-secondary"><i class="fas fa-arrow-circle-down fa-3x"></i></button>
             </div>
           </div>
           <div class="row justify-content-evenly my-4">
@@ -57,7 +54,7 @@
               </div>
             </div>
             <div class="col-sm-6 text-center">
-              <button type="button" class="btn btn-success"><i class="fas fa-seedling"></i> Plant</button>
+              <button id="wb-plant" type="button" class="btn btn-success"><i class="fas fa-seedling"></i> Plant</button>
             </div>
           </div>
         </div>
@@ -65,20 +62,20 @@
           <h2>Turtlebot</h2>
           <div class="row justify-content-evenly my-2">
             <div class="col-sm-4 col align-self-center">
-              <button type="button" class="btn btn-secondary"><i class="fas fa-arrow-circle-up fa-3x"></i></button>
+              <button id="tb-up" type="button" class="btn btn-secondary"><i class="fas fa-arrow-circle-up fa-3x"></i></button>
             </div>
           </div>
           <div class="row justify-content-evenly">
             <div class="col-sm-4 align-self-start">
-              <button type="button" class="btn btn-secondary"><i class="fas fa-arrow-circle-left fa-3x"></i></button>
+              <button id="tb-lt" type="button" class="btn btn-secondary"><i class="fas fa-arrow-circle-left fa-3x"></i></button>
             </div>
             <div class="col-sm-4 align-self-end">
-              <button type="button" class="btn btn-secondary "><i class="fas fa-arrow-circle-right fa-3x"></i></button>
+              <button id="tb-rt" type="button" class="btn btn-secondary "><i class="fas fa-arrow-circle-right fa-3x"></i></button>
             </div>
           </div>
           <div class="row justify-content-evenly my-2">
             <div class="col-sm-4 col align-self-center">
-              <button type="button" class="btn btn-secondary"><i class="fas fa-arrow-circle-down fa-3x"></i></button>
+              <button id="tb-dn" type="button" class="btn btn-secondary"><i class="fas fa-arrow-circle-down fa-3x"></i></button>
             </div>
           </div>
         </div>
@@ -93,12 +90,12 @@
           </div>
           <div name="camera-live" class="container-fluid my-4 shadow p-4">
             <h2>Live camera view</h2>
-            <img id=cam class="img-fluid" alt="3d-webots-map">
+            <img id=cam class="img-fluid" alt="camera live view">
           </div>
           <hr/>
           <div name="map-2d" class="container-fluid my-4 shadow p-4">
             <h2>2D octomap of turtlebot</h2>
-            <img id=map2d class="img-fluid" alt="3d-webots-map">
+            <img id=map2d class="img-fluid" alt="2d-turtlebot-map">
           </div>
         </div>
       </div>
@@ -134,44 +131,11 @@
     </div>
   </div>
 
-  <script>
-
-  $(document).ready(function(){
-      var socket = io();
-
-      socket.on('connect', function () {
-        console.log('socket client connected')
-      });
-
-
-      socket.on('disconnect', function () {
-        console.log('socket client disconnected')
-      });
-    })
-
-
-    document.getElementById('map3d').src = "static/pic/" + "20min.png";
-    document.getElementById('map3d').style.height = "400px";
-    document.getElementById('map3d').style.width = "800px";
-
-    function doSetTimeout(i) {
-      // setTimeout(function () { alert(i); }, 5000 * i);
-      setTimeout(function () {
-        document.getElementById('cam').src = "static/pic/s" + i + ".png";
-        document.getElementById('cam').style.height = "400px";
-        document.getElementById('cam').style.width = "800px";
-      }, 4000 * i);
-    }
-
-    for (var i = 1; i <= 8; ++i) {
-      doSetTimeout(i);
-    }
-
-
-  </script>
-
-
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.3/socket.io.js" integrity="sha512-2RDFHqfLZW8IhPRvQYmK9bTLfj/hddxGXQAred2wNZGkrKQkLGj8RCkXfRJPHlDerdHHIzTFaahq4s/P4V6Qig==" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/c48400dc75.js" crossorigin="anonymous"></script>
+  <script src="{{ url_for('static', filename='app.js')}}"></script>
 </body>
 
 </html>
