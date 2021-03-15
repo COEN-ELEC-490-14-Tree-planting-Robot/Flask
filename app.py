@@ -1,12 +1,29 @@
 from flask import Flask, render_template
-app = Flask(__name__)
+from flask_socketio import SocketIO
+from flask_socketio import SocketIO, emit
+import os
+import sys
+import json
 
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret'
+socketio=SocketIO(app)
+
+@socketio.on('connect')
+def ws_connect():
+    print('socket connected')
+        
+@socketio.on('disconnect')
+def ws_disconnect():
+    print('socket disconnected')
+    
 
 @app.route('/', methods=["POST","GET"])
 
-def index():
-    return render_template('index.html')
+
+def home():
+    return render_template("index.html")
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    socketio.run(app, debug=True)
