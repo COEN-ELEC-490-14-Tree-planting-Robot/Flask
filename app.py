@@ -1,6 +1,11 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 from flask_socketio import SocketIO, emit
+import sys
+import time
+import logging
+from watchdog.observers import Observer
+from watchdog.events import LoggingEventHandler
 import os
 import sys
 import json
@@ -42,4 +47,14 @@ def home():
 
 
 if __name__ == "__main__":
+
+    logging.basicConfig(level=logging.INFO,
+                        format='%(asctime)s - %(message)s',
+                        datefmt='%Y-%m-%d %H:%M:%S')
+    path = "/Users/yanghaocheng/Desktop/h/pcode/"
+    event_handler = LoggingEventHandler()
+    observer = Observer()
+    observer.schedule(event_handler, path, recursive=True)
+    observer.start()
     socketio.run(app, debug=True)
+    
