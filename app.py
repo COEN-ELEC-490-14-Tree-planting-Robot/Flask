@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_socketio import SocketIO
 from flask_socketio import SocketIO, emit
 import os
@@ -34,6 +34,24 @@ def wb_navigate(command):
     elif command == 'm':
         print(command)
 
+@socketio.on('cam-wb')
+@app.route('/cam-wb', methods=['POST'])
+def receiveCamWB():
+    uri = request.form['uri']
+    print(uri)
+    socketio.emit('cam-wb',{'data' : uri})
+    return 'success-cam'
+
+
+@socketio.on('gps-wb')
+@app.route('/gps-wb', methods=['POST'])
+def receiveGPSWB():
+    gps = request.form['gps']
+    print(gps)
+    socketio.emit('gps-wb',{'data' : gps})
+    return 'success-gps'
+
+
 
 @app.route('/', methods=["POST","GET"])
 def home():
@@ -42,4 +60,4 @@ def home():
 
 
 if __name__ == "__main__":
-    socketio.run(app, debug=True)
+    socketio.run(app, debug=False)
