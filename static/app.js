@@ -10,17 +10,27 @@ $(document).ready(function(){
       console.log('socket client disconnected');
     });
 
-    socket.on('gps-wb', function (content) {
+    socket.on('gps-change', function (content) {
         console.log("gps: " + content.data);
         $('#gps-wb').text(content.data);
       });
-    
-    socket.on('cam-wb', function (content) {
-        console.log("cam: " + content.data);
-        //$('#cam').attr("src", "static/pic/cam-def.jpg?"+ (new Date()));
+
+    socket.on('control-change', function (content) {
+        console.log("controls: " + content.data);
+        //$('#gps-wb').text(content.data);
+      });
+
+    socket.on('cam-change', function () {
+        console.log("cam changed");
         $('#cam').attr("src", "static/pic/cam-wb.jpg?"+ (new Date()));
     });
 
+    socket.on('map-change', function(){
+        console.log("map changed");
+        $('#map3d-t').attr("src", "static/maps/map-wb-t.png?"+ (new Date()));
+        $('#map3d-f').attr("src", "static/maps/map-wb-f.png?"+ (new Date()));
+        $('#map3d-r').attr("src", "static/maps/map-wb-r.png?"+ (new Date()));
+    });
 
     $("#wb-up").on('click', () => {
         console.log('w');
